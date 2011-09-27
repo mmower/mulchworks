@@ -1,0 +1,29 @@
+Okay so the purpose of these scripts is to do some creative messing about with AudioMulch.
+
+The first problem is with recorded automation data. Recording knob movement
+generates a *lot* of data which can be a pain to edit in the automation pane.
+So we're going to try and filter and smooth that into something more useful.
+
+The first curvesmoother (probably the wrong name but...) halves the number
+of automation points by averaging adjacent points (except the first and last
+points which remain fixed). Again probably not very useful but it's a proof of
+concept for more useful utilities (e.g. convolution with Gaussian kernel whatever
+the hell that means :))
+
+To use you will need Ruby 1.8 and the trollop and nokogiri gems installed. Then
+
+./curvesmooth saved_patch.amh GadgetName PropertyName
+
+e.g.
+
+./curvesmooth my_patch.amh BubbleBlower_1 Amplitude
+
+which will write a new patch as 'saved_patch_sm.amh'. Your existing patch is never
+modified.
+
+Note that this version has only been tested with min/max properties such as the
+BubbleBlower Amplitude. Single valued parameters won't work yet.
+
+If you test it out let me know, Matt <self@mattmower.com>
+
+
